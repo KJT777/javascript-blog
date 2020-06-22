@@ -255,14 +255,13 @@
   </div>
 </div>
 
- <!-- szablon z chmurą autorów i z pętlą i funkcja calculate classname ! -->
  <script id="template-author-cloud-link" type="text/x-handlebars-template">
     {{#each authors}}
     <li><a class="tag-size-{{ className }}" href ="#author-{{author}}">{{author}}</a></li>
     {{/each}}
     </script>
 
-    <!-- szablon z chmurą tagów z pętlą i funkcja calculate classname ! -->
+    
     <script id="template-tag-cloud-link" type="text/x-handlebars-template">
     {{#each tags}}
     <li><a class="tag-size-{{ className }}" href="#tag-{{ tag }}">{{ tag }}</a></li>
@@ -277,12 +276,11 @@
     <li><a href="#tag-{{ id }}"><span>{{ title }}</span></a></li>
     </script>
 
-    <!-- dodajemy pierwszy szablon/ template handlebars -->
     <script id="template-article-link" type="text/x-handlebars-template">
     <li><a href="#{{ id }}"><span>{{ title }}</span></a></li>
     </script>
 
-    <!-- dodajemy script Handlebars -->
+    <!-- script Handlebars -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
