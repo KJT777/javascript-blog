@@ -59,13 +59,13 @@ function titleClickHandler(event){
 
 /* Generating title links! */
 function generateTitleLinks(customSelector = ''){ 
-     //const opts = {  
-   // articleSelector: '.post',
-    //titleSelector: '.post-title',
-    //titleListSelector: '.titles'
+  //const opts = {  
+// articleSelector: '.post',
+  //titleSelector: '.post-title',
+  //titleListSelector: '.titles'
   //};
   
-    /*remove contents of titlelist*/
+  /*remove contents of titlelist*/
   const titleList = document.querySelector(optTitleListSelector);
 
   titleList.innerHTML = '';
@@ -129,7 +129,7 @@ function calculateTagsParams(tags){
     min: '999999'
   };
   for(let tag in tags){
-  console.log(tag + ' is used ' + tags[tag] + ' times ');
+ console.log(tag + ' is used ' + tags[tag] + ' times ');
     
     if (tags[tag] > params.max) {
       params.max = tags[tag];
@@ -149,9 +149,9 @@ const params = {
 for(let author in authors){
 console.log(author + ' is used ' + authors[author] + ' times ');
   
-  if (authors[author] > params.max) {
+ if (authors[author] > params.max) {
     params.max = authors[author];
-  }
+ }
   if (authors[author] < params.min) {
     params.min = authors[author];
   }
@@ -209,19 +209,14 @@ function generateTags(){
       /* add generated code to html variable */
       html = html + linkHTML;
       console.log(html);
-     /* [NEW] check if this link is NOT already in allTags */
-    
-      if(!allTags.hasOwnProperty(tag)){
-      
-    /* [NEW] add generated code to allTags array */
-    allTags[tag] = 1;
-      } else {
-      allTags[tag]++;
   }
+     /* [NEW] check if this link is NOT already in allTags */
+     if(allTags.indexOf(linkHTML) == -1){
+      /* [NEW] add generated code to allTags array */
+      allTags.push(linkHTML);
+    }
     /* END LOOP: for each tag */
     }
-
-    // lista tagów z prawej kolumny?//
     /* insert HTML of all the links into the tags wrapper */
     tagsWrapper.insertAdjacentHTML('beforeend', html);   // czy tagsWrapper.innerHTML = html;?
 
@@ -231,6 +226,11 @@ function generateTags(){
   for (let tag of tags){
     tag.addEventListener('click', tagClickHandler);       
   }
+  /* [NEW] find list of tags in right column */
+  const tagList = document.querySelector('.tags');
+
+  /* [NEW] add html from allTags to tagList */
+  tagList.innerHTML = allTags.join(' ');
 }
 generateTags();
 
