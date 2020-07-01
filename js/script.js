@@ -209,19 +209,24 @@ function generateTags(){
       /* add generated code to html variable */
       html = html + linkHTML;
       console.log(html);
-  }
+  } 
      /* [NEW] check if this link is NOT already in allTags */
-     if(allTags.indexOf(linkHTML) == -1){
-      /* [NEW] add generated code to allTags array */
-      allTags.push(linkHTML);
+     if(!allTags[tag]) {
+     /* [NEW] add tag to allTags object */
+    allTags[tag] = 1;
+  } else {
+    allTags[tag]++;
+  }
+  }
+  //W warunku użyliśmy wykrzyknika (!), czyli zastosowaliśmy negację. Dlatego warunek czytamy jako "jeśli allTags NIE MA klucza tag".Jeśli natomiast ten tag już znajduje się w allTags, zwiększymy licznik wystąpień o 1. Dopiszemy więc blok else://
     }
     /* END LOOP: for each tag */
-    }
+  }
     /* insert HTML of all the links into the tags wrapper */
     tagsWrapper.insertAdjacentHTML('beforeend', html);   // czy tagsWrapper.innerHTML = html;?
 
   /* END LOOP: for every article: */
-  }
+  
   const tags = document.querySelectorAll('.post-tags .list li a');      
   for (let tag of tags){
     tag.addEventListener('click', tagClickHandler);       
@@ -229,9 +234,19 @@ function generateTags(){
   /* [NEW] find list of tags in right column */
   const tagList = document.querySelector('.tags');
 
-  /* [NEW] add html from allTags to tagList */
-  tagList.innerHTML = allTags.join(' ');
+  /* [NEW] create variable for all links HTML code */
+  let allTagsHTML = '';
+
+  /* [NEW] START LOOP: for each tag in allTags: */
+  for(let tag in allTags){
+  /* [NEW] generate code of a link and add it to allTagsHTML */
+  allTagsHTML += tag + ' (' + allTags[tag] + ') ';
 }
+/* [NEW] END LOOP: for each tag in allTags: */
+
+/*[NEW] add HTML from allTagsHTML to tagList */
+tagList.innerHTML = allTagsHTML;
+
 generateTags();
 
 // Funkcja po kliknięciu w tag
@@ -339,7 +354,10 @@ function generateAuthors(){
     html = html + linkHTML;
     console.log(html);
   }
-
+  const tagsParams = calculateTagsParams(allTags);
+  console.log('tagsParams:', tagsParams)
+  /* [NEW] create variable for all links HTML code */
+    let allTagsHTML = '';
   const authorListSidebar = document.querySelector('.authors');
   const authorsParams = calculateTagsParams(allAuthors);
   console.log('authorParams:', authorsParams);
