@@ -156,7 +156,7 @@ function generateTags(){
   /* START LOOP: for every article: */
   for (let article of articles){
   /* find tags wrapper */
-   const tagsWrapper = article.querySelector(optArticleTagsListSelector);
+   const tagsWrapper = article.querySelector(optArticleTagsSelector);
   /* make html variable with empty string */
     let html = "";
     /* get tags from data-tags attribute */
@@ -171,9 +171,9 @@ function generateTags(){
     /* add generated code to html variable */
     html = html + linkHTML;
     /* [NEW] check if this link is NOT already in allTags */
-     if(allTags.indexOf(linkHtml)== -1){
+     if(allTags.indexOf(linkHTML)== -1){
      /* [NEW] add generated code to allTags array */
-    allTags.push(linkHtml);
+    allTags.push(linkHTML);
   } 
     /* END LOOP: for each tag */
   }
@@ -185,7 +185,7 @@ function generateTags(){
   const tagList = document.querySelector('.tags');
   /*[NEW] add HTML from allTagsHTML to tagList */
   tagList.innerHTML = allTags.join('');
-
+}
 generateTags();
 
 // Funkcja po kliknięciu w tag
@@ -264,14 +264,14 @@ function generateAuthors(){
     const linkHTML = templates.authorLink(linkHTMLData);
 
     /* check if author is not already on the list */
-    if(!allAuthors.hasOwnProperty(author)){
-        allAuthors[author] = 1;
+    if(!allAuthors.hasOwnProperty(articleAuthor)){
+        allAuthors[articleAuthor] = 1;
       } else {
-        allAuthors[author]++;
+        allAuthors[articleAuthor]++;
     }
     /* insert HTML of all the links into the authors wrapper */
   
-    authorWrapper.insertAdjacentHTML('beforeend', linkHTML);
+    authorsWrapper.insertAdjacentHTML('beforeend', linkHTML);
   
     // add generated code to html variable
     html = html + linkHTML;
@@ -342,11 +342,11 @@ function authorClickHandler(event){
     /* END LOOP: for each found author link */
     }
     /* execute function "generateTitleLinks" with article selector as argument */
-      generateTitleLinks('[data-author="' + author + '"]');
-    }
+    generateTitleLinks('[data-author="' + author + '"]');
+}
+  
     const addClickListenersToAuthors = function () {
       /* find all links to authors */
-}
     const authorLinks = document.querySelectorAll('a[href^="#author-"]');//lub const authorLinks = document.querySelectorAl('.post .post-author a');// 
       /* START LOOP: for each link */
     for (let authorLink of authorLinks) {
@@ -354,4 +354,5 @@ function authorClickHandler(event){
     authorLink.addEventListener('click', authorClickHandler);
       /* END LOOP: for each link */
   }
+}
   addClickListenersToAuthors();
