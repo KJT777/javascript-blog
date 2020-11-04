@@ -1,3 +1,3 @@
 # javascript-blog
 
-moja nauka js
+Moja nauka JS
